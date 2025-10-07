@@ -115,5 +115,9 @@ When requesting a non-existent file, the client receives a 404 response:
 
 ![img_9.png](Images/img_9.png)
 
+### Connect to friend s server
+![img.png](Images/ipconfig.png)
+![img.png](Images/friendphoto.png)
+![img_1.png](Images/friendphoto1.png)
 ## Conclusion
 In this lab, we built a simple yet functional HTTP file server and client using Python. The implementation supported file retrieval, navigation through nested directories, and downloading various file types including HTML, PNG, and PDF. Our testing confirmed that the server responds appropriately to valid requests, provides directory listings, and returns accurate 404 errors for missing resources. Overall, the project demonstrated fundamental concepts of HTTP communication and file handling in a networked environment.
