@@ -1,0 +1,34 @@
+services:
+  http-server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server
+    container_name: http-server
+    ports:
+      - "8080:8080"
+    networks:
+      - network-lab
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  http-server-single-threaded:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server2
+    container_name: http-server-single-threaded
+    ports:
+      - "8081:8081"
+    networks:
+      - network-lab
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  network-lab:
+    driver: bridge
