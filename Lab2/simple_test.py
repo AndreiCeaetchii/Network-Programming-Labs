@@ -140,11 +140,11 @@ def test_concurrent_users(server_host, server_port, duration=10):
     spam_success_rate = spam_results[0] / spam_results[2] * 100 if spam_results[2] > 0 else 0
     normal_success_rate = normal_results[0] / normal_results[2] * 100 if normal_results[2] > 0 else 0
     
-    print(f"🔴 SPAM USER:")
+    print(f"SPAM USER:")
     print(f"   Success rate: {spam_success_rate:.1f}%")
     print(f"   Requests blocked: {spam_results[1]} out of {spam_results[2]}")
     
-    print(f"\n🟢 NORMAL USER:")
+    print(f"\nNORMAL USER:")
     print(f"   Success rate: {normal_success_rate:.1f}%")
     print(f"   Requests blocked: {normal_results[1]} out of {normal_results[2]}")
 
