@@ -232,21 +232,6 @@ class HTTPServer:
                 request_count = self.get_file_counter(link_path)
 
             html += f'        <li>{icon} <a href="{link_path}">{file}</a> ({file_type}) - <strong>{request_count} requests</strong></li>\n'
-
-        html += """    </ul>
-    
-    <h2>All Request Counters:</h2>
-    <ul>"""
-
-        # Show all counters for debugging
-        with self.counter_lock:
-            for path, count in sorted(self.file_counters.items()):
-                html += f'        <li><strong>{path}</strong>: {count} requests</li>\n'
-
-        html += """    </ul>
-</body>
-</html>"""
-
         return html
 
     def get_file_icon(self, filename):
