@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Single-threaded HTTP server for performance comparison with multithreaded version.
-This is a copy of the original Lab1 server with 1-second delay added.
-"""
-
 import socket
 import os
 import sys
@@ -19,7 +13,6 @@ class SingleThreadHTTPServer:
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         
     def start(self):
-        """Start the single-threaded HTTP server"""
         try:
             self.socket.bind((self.host, self.port))
             self.socket.listen(10)
@@ -40,9 +33,7 @@ class SingleThreadHTTPServer:
             self.socket.close()
     
     def handle_request(self, client_socket):
-        """Handle a single HTTP request"""
         try:
-            # Receive and parse the request
             request = client_socket.recv(1024).decode('utf-8')
             if not request:
                 return
@@ -51,7 +42,6 @@ class SingleThreadHTTPServer:
             if not lines:
                 return
                 
-            # Parse the request line
             request_line = lines[0].strip()
             parts = request_line.split()
             if len(parts) < 3:
@@ -64,10 +54,8 @@ class SingleThreadHTTPServer:
                 self.send_error(client_socket, 405, "Method Not Allowed")
                 return
                 
-            # Decode URL path
             path = unquote(path)
             
-            # Add delay to simulate work (1 second)
             print("Single-threaded server: Simulating work for 1 second...")
             time.sleep(1)
             
@@ -79,7 +67,6 @@ class SingleThreadHTTPServer:
             self.send_error(client_socket, 500, "Internal Server Error")
     
     def serve_file(self, client_socket, path):
-        """Serve a file or directory listing"""
         # Remove leading slash and resolve path
         if path == '/':
             path = ''
@@ -103,7 +90,6 @@ class SingleThreadHTTPServer:
             self.serve_regular_file(client_socket, full_path)
     
     def serve_directory(self, client_socket, dir_path, url_path):
-        """Serve a directory listing"""
         try:
             files = os.listdir(dir_path)
             files.sort()
@@ -222,7 +208,6 @@ class SingleThreadHTTPServer:
         return content_types.get(ext, 'application/octet-stream')
     
     def send_error(self, client_socket, code, message):
-        """Send HTTP error response"""
         error_messages = {
             400: "Bad Request",
             403: "Forbidden", 
@@ -264,7 +249,7 @@ def main():
         print(f"Error: '{directory}' is not a directory")
         sys.exit(1)
     
-    server = SingleThreadHTTPServer('0.0.0.0', 8081, directory)  # Use port 8081
+    server = SingleThreadHTTPServer('0.0.0.0', 8081, directory)
     server.start()
 
 if __name__ == "__main__":

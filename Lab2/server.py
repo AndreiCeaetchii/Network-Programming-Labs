@@ -323,7 +323,6 @@ def main():
         print(f"Error: '{directory}' is not a directory")
         sys.exit(1)
 
-    # Parse command line arguments for demo modes
     demo_race_condition = "--demo-race" in sys.argv
     no_delay = "--no-delay" in sys.argv
 
