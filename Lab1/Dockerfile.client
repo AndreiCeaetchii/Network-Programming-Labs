@@ -1,0 +1,7 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY client.py .
+
+# Wait for server to start (compose handles healthcheck)
+CMD ["python", "client.py", "http-server", "8080", "index.html"]
