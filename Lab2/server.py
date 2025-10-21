@@ -78,6 +78,7 @@ class HTTPServer:
     def handle_request(self, client_socket, client_address):
         try:
             client_ip = client_address[0]
+            time.sleep(1)
             if not self.check_rate_limit(client_ip):
                 self.send_error(client_socket, 429, "Too Many Requests")
                 return

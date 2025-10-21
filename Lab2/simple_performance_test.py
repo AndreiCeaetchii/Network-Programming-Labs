@@ -69,19 +69,15 @@ def test_server_performance(server_host, server_port, num_requests=10, server_na
     for result in results:
         if result and result[0]:
             successful += 1
-    
-    throughput = successful / total_time if total_time > 0 else 0
-    
+
     print(f"Results:")
     print(f"Successful: {successful}/{num_requests}")
     print(f"Total time: {total_time:.2f} seconds")
-    print(f"Throughput: {throughput:.2f} requests/second")
-    
+
     return {
         'successful': successful,
         'total': num_requests,
         'total_time': total_time,
-        'throughput': throughput
     }
 
 def main():

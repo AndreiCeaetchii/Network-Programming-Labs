@@ -118,7 +118,7 @@ The files are loaded from the `lab1/public` folder.
 
 The multithreaded server handles multiple requests concurrently, completing them significantly faster than the single-threaded server, which processes only one request at a time.
 
-![img\_6.png](Images/img_6.png)
+![img.png](Images/img_12.png)
 
 ---
 
