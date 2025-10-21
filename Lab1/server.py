@@ -22,6 +22,7 @@ class HTTPServer:
             while True:
                 client_socket, client_address = self.socket.accept()
                 print(f"Connection from {client_address}")
+                print(self.socket.getsockname())
                 self.handle_request(client_socket)
                 client_socket.close()
                 

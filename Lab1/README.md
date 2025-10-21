@@ -3,7 +3,7 @@ Name: Ceaetchii Andrei
 
 ## 1. Source Directory Structure
 The project contains a public folder where shared information is stored, as well as the client and server implementations, each with its own Dockerfile, and a docker-compose.yml file for running the containers together.
-![img.png](Images/img.png)
+![img.png](img.png)![img.png](Images/img.png)
 ## 2. Docker Configuration Files
 ### docker-compose.yml
 ```yaml
