@@ -48,16 +48,13 @@ def spam_user(server_host, server_port, duration=10):
         
         if status == 200:
             successful += 1
-            print(f"Request {total}: Success")
         elif status == 429:
             rate_limited += 1
-            print(f"Request {total}: Rate Limited")
         else:
             print(f"Request {total}: Error {status}")
         
         total += 1
         
-        # Wait 0.1 seconds (10 requests per second)
         time.sleep(0.1)
     
     print(f"\nSPAM USER RESULTS:")
@@ -79,13 +76,11 @@ def normal_user(server_host, server_port, duration=10):
         
         if status == 200:
             successful += 1
-            print(f"Request {total}: Success")
         elif status == 429:
             rate_limited += 1
-            print(f"Request {total}: Rate Limited")
         else:
             print(f"Request {total}: Error {status}")
-        
+
         total += 1
         
         time.sleep(0.25)
@@ -99,13 +94,9 @@ def normal_user(server_host, server_port, duration=10):
     return successful, rate_limited, total
 
 def test_concurrent_users(server_host, server_port, duration=10):
-    print("="*60)
-    print("🔄 TESTING BOTH USERS CONCURRENTLY")
-    print("="*60)
     print(f"Server: {server_host}:{server_port}")
     print(f"Test duration: {duration} seconds")
     print(f"Rate limit: 5 requests/second per IP")
-    print("="*60)
 
     spam_results = [0, 0, 0]
     normal_results = [0, 0, 0]
@@ -120,26 +111,19 @@ def test_concurrent_users(server_host, server_port, duration=10):
     
     spam_t = threading.Thread(target=spam_thread)
     normal_t = threading.Thread(target=normal_thread)
-    
-    print("\nStarting both users simultaneously...")
-    start_time = time.time()
-    
+
     spam_t.start()
+
+    time.sleep(10)
+
     normal_t.start()
     
     spam_t.join()
     normal_t.join()
     
-    end_time = time.time()
-    
-    # Compare results
-    print("\n" + "="*60)
-    print("COMPARISON RESULTS")
-    print("="*60)
-    
     spam_success_rate = spam_results[0] / spam_results[2] * 100 if spam_results[2] > 0 else 0
     normal_success_rate = normal_results[0] / normal_results[2] * 100 if normal_results[2] > 0 else 0
-    
+
     print(f"SPAM USER:")
     print(f"   Success rate: {spam_success_rate:.1f}%")
     print(f"   Requests blocked: {spam_results[1]} out of {spam_results[2]}")

@@ -137,7 +137,7 @@ By introducing artificial delays (e.g., `sleep(1s)`), we can observe that the si
 
 The multithreaded server includes a rate-limiting mechanism that allows a maximum of **5 requests per second per user**. This prevents spam users from overloading the server while allowing normal users to continue making legitimate requests.
 
-![img\_11.png](Images/img_11.png)
+![img.png](Images/img_13.png)
 
 ---
 
