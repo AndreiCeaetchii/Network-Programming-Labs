@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY server_single_thread.py .
+COPY public ./public
+
+EXPOSE 8081
+
+CMD ["python", "server_single_thread.py"]
