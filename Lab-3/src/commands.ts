@@ -15,36 +15,35 @@ import { Board } from './board.js';
  * Looks at the current state of the board.
  *
  * @param board a Memory Scramble board
- * @param playerId ID of player looking at the board; 
+ * @param playerId ID of player looking at the board;
  *                 must be a nonempty string of alphanumeric or underscore characters
- * @returns the state of the board from the perspective of playerId, in the format 
+ * @returns the state of the board from the perspective of playerId, in the format
  *          described in the ps4 handout
  */
 export async function look(board: Board, playerId: string): Promise<string> {
-    throw new Error('look function not implemented');
-    // implement with glue code only, at most three lines
+    return board.getBoardState(playerId);
 }
 
 /**
  * Tries to flip over a card on the board, following the rules in the ps4 handout.
- * If another player controls the card, then this operation waits until the flip 
+ * If another player controls the card, then this operation waits until the flip
  * either becomes possible or fails.
  *
  * @param board a Memory Scramble board
- * @param playerId ID of player making the flip; 
+ * @param playerId ID of player making the flip;
  *                 must be a nonempty string of alphanumeric or underscore characters
  * @param row row number of card to flip;
  *            must be an integer in [0, height of board), indexed from the top of the board
- * @param column column number of card to flip; 
+ * @param column column number of card to flip;
  *               must be an integer in [0, width of board), indexed from the left of the board
- * @returns the state of the board after the flip from the perspective of playerId, in the 
+ * @returns the state of the board after the flip from the perspective of playerId, in the
  *          format described in the ps4 handout
- * @throws an error (in a rejected promise) if the flip operation fails as described 
+ * @throws an error (in a rejected promise) if the flip operation fails as described
  *         in the ps4 handout.
  */
 export async function flip(board: Board, playerId: string, row: number, column: number): Promise<string> {
-    throw new Error('flip function not implemented');
-    // implement with glue code only, at most three lines
+    await board.flipCard(playerId, row, column);
+    return board.getBoardState(playerId);
 }
 
 /**
@@ -71,21 +70,21 @@ export async function flip(board: Board, playerId: string, row: number, column: 
  *          in the format described in the ps4 handout
  */
 export async function map(board: Board, playerId: string, f: (card: string) => Promise<string>): Promise<string> {
-    throw new Error('map function not implemented');
-    // implement with glue code only, at most three lines
+    await board.mapCards(f);
+    return board.getBoardState(playerId);
 }
 
 /**
- * Watches the board for a change, waiting until any cards turn face up or face down, 
+ * Watches the board for a change, waiting until any cards turn face up or face down,
  * are removed from the board, or change from one string to a different string.
  *
  * @param board a Memory Scramble board
- * @param playerId ID of player watching the board; 
+ * @param playerId ID of player watching the board;
  *                 must be a nonempty string of alphanumeric or underscore characters
- * @returns the updated state of the board from the perspective of playerId, in the 
+ * @returns the updated state of the board from the perspective of playerId, in the
  *          format described in the ps4 handout
  */
 export async function watch(board: Board, playerId: string): Promise<string> {
-    throw new Error('watch function not implemented');
-    // implement with glue code only, at most three lines
+    await board.waitForChange();
+    return board.getBoardState(playerId);
 }
