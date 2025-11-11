@@ -21,6 +21,7 @@ async function simulationMain(): Promise<void> {
     const tries = 100; // 100 moves each as per requirements
     const minDelayMilliseconds = 0.1; // Minimum timeout as per requirements
     const maxDelayMilliseconds = 2; // Maximum timeout as per requirements
+    const badError = 500;
 
     console.log('=== INITIAL BOARD STATE ===');
     console.log(board.toString());
@@ -70,7 +71,20 @@ async function simulationMain(): Promise<void> {
                 console.log(`\n${playerId}'s view of the board:`);
                 console.log(board.getBoardState(playerId));
             } catch (err) {
-                console.error(`${playerId} attempt to flip a card failed:`, err);
+                // Check if it's a server error (with code property)
+                if (err != null && typeof err === 'object' && 'code' in err) {
+                    if (err.code === badError) {
+                        console.error(`${playerId} encountered server error, stopping simulation`);
+                        return;
+                    }
+                }
+
+                // Game logic errors (from board.flipCard) - log but continue playing
+                if (err instanceof Error) {
+                    console.log(`${playerId} game logic error: ${err.message}`);
+                } else {
+                    console.error(`${playerId} unknown error:`, err);
+                }
             }
         }
 

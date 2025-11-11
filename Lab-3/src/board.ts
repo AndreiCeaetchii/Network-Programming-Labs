@@ -51,13 +51,10 @@ export class Board {
     //   if cards[i] is null, then faceUp[i] is false and controlledBy[i] is null
     //   if controlledBy[i] is not null, then faceUp[i] is true and cards[i] is not null
     //   for each player in playerStates, currentCards.length <= 2
-    //   waitingPlayers keys are valid positions [0, rows*columns)
     // Safety from rep exposure:
     //   rows and columns are readonly and immutable (number)
     //   all arrays are private and readonly references, but contents are mutable (by design)
     //   playerStates and waitingPlayers are private and mutable
-    //   methods return defensive copies or formatted strings, never direct references to mutable state
-
     /**
      * Create a new board.
      *
