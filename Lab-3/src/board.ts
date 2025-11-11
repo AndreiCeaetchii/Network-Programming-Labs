@@ -210,6 +210,7 @@ export class Board {
                         this.faceUp[pos] = false;
                         this.controlledBy[pos] = null;
                         boardChanged = true;
+                        this.notifyWaitingPlayers(pos);
                     }
                 }
             } else {

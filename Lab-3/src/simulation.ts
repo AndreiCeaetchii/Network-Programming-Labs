@@ -17,9 +17,10 @@ async function simulationMain(): Promise<void> {
     const filename = 'boards/perfect.txt'; // Use smaller 3x3 board for easier visualization
     const board: Board = await Board.parseFromFile(filename);
     const size = 3; // 3x3 board
-    const players = 2; // 2 players for easier visualization
-    const tries = 5; // Fewer tries for cleaner output
-    const maxDelayMilliseconds = 200; // Slower for better visualization
+    const players = 4; // 4 players as per requirements
+    const tries = 100; // 100 moves each as per requirements
+    const minDelayMilliseconds = 0.1; // Minimum timeout as per requirements
+    const maxDelayMilliseconds = 2; // Maximum timeout as per requirements
 
     console.log('=== INITIAL BOARD STATE ===');
     console.log(board.toString());
@@ -45,8 +46,8 @@ async function simulationMain(): Promise<void> {
 
         for (let jj = 0; jj < tries; ++jj) {
             try {
-                // Random delay before first card
-                await timeout(Math.random() * maxDelayMilliseconds);
+                // Random delay before first card (between minDelayMilliseconds and maxDelayMilliseconds)
+                await timeout(minDelayMilliseconds + Math.random() * (maxDelayMilliseconds - minDelayMilliseconds));
 
                 // Try to flip over a first card at random position
                 const row1 = randomInt(size);
@@ -55,8 +56,8 @@ async function simulationMain(): Promise<void> {
                 await board.flipCard(playerId, row1, col1);
                 console.log(`${playerId} successfully flipped first card at (${row1}, ${col1})`);
 
-                // Random delay before second card
-                await timeout(Math.random() * maxDelayMilliseconds);
+                // Random delay before second card (between minDelayMilliseconds and maxDelayMilliseconds)
+                await timeout(minDelayMilliseconds + Math.random() * (maxDelayMilliseconds - minDelayMilliseconds));
 
                 // Try to flip over a second card at random position
                 const row2 = randomInt(size);
